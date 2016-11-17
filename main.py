@@ -1,14 +1,16 @@
 import requests
 import json
 import os
+import email_functions
+
 
 def slack_notification(message):
     headers = {
         "Content-Type": "application/json"
     }
     data = json.dumps({
-        "channel" : "#email"
-        "text": "In KWOC Website following error occured :\n{}".format(message)
+        "channel": "#email",
+        "text": message
     })
     r = requests.post(
         os.environ["SLACK_WEBHOOK_URL"], headers=headers, data=data)
@@ -17,4 +19,16 @@ def slack_notification(message):
         print("in slack_notification : {}".format(r.status_code))
         print(r.text)
 
-slack_notification("Hello World")
+mails = email_functions.reading_mail()
+if mails :
+    slack_notification("Got {} new mails".format(len(mails)))
+    for index, mail in enumerate(mails):
+        message = """
+         {}. Subject : {}
+             Body :\n {}
+        """.format(index ,
+                   mail["subject"],
+                   mail["body"])
+        slack_notification(message)
+else :
+    print "No new mail"
