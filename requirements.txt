@@ -1,1 +1,2 @@
-requests
+requests==2.10.0
+pygmail==0.0.5.4
