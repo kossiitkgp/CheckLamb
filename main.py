@@ -9,7 +9,6 @@ def slack_notification(message):
         "Content-Type": "application/json"
     }
     data = json.dumps({
-        "mrkdwn" : true
         "channel": "#email",
         "text": message
     })
