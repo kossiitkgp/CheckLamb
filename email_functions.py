@@ -6,6 +6,7 @@ import gmail
 import smtplib
 import json
 from email.mime.text import MIMEText
+import os
 # import Logger
 # import sms
 # logger = Logger.Logger(name='RunLog')
@@ -20,9 +21,9 @@ def reading_mail () :  # this function returns a dictionary with email arguments
 	if len(unread_mails) > 0 :
 		for mail in unread_mails :
 			mail.fetch()   # getting all the mail attributes like body,subject etc
-			mail_args = {'subject' : mail.subject , 'msg_body' : mail.body}
+			mail_args = {'subject' : mail.subject , 'body' : mail.body}
 			mail_list.append(mail_args)
-			mail.read()  #marking the mail as read
+			# mail.read()  #marking the mail as read
 		g.logout()  #logging out
 		# sms.send_msg(total_unread)
 		return mail_list

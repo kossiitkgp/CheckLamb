@@ -21,14 +21,12 @@ def slack_notification(message):
 
 mails = email_functions.reading_mail()
 if mails :
+    print "Sending mails"
     slack_notification("Got {} new mails".format(len(mails)))
     for index, mail in enumerate(mails):
-        message = """
-         {}. Subject : {}
-             Body :\n {}
-        """.format(index ,
-                   mail["subject"],
-                   mail["body"])
+        message = "{}.\n*Subject* : {}\n*Body* :{}".format(index+1 ,
+                                                mail["subject"],
+                                                mail["body"])
         slack_notification(message)
 else :
     print "No new mail"
