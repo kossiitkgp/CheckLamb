@@ -23,7 +23,7 @@ def reading_mail () :  # this function returns a dictionary with email arguments
 			mail.fetch()   # getting all the mail attributes like body,subject etc
 			mail_args = {'subject' : mail.subject , 'body' : mail.body}
 			mail_list.append(mail_args)
-			# mail.read()  #marking the mail as read
+			mail.read()  #marking the mail as read
 		g.logout()  #logging out
 		# sms.send_msg(total_unread)
 		return mail_list

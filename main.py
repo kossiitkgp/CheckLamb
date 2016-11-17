@@ -9,6 +9,7 @@ def slack_notification(message):
         "Content-Type": "application/json"
     }
     data = json.dumps({
+        "mrkdwn" : true
         "channel": "#email",
         "text": message
     })
@@ -22,9 +23,13 @@ def slack_notification(message):
 mails = email_functions.reading_mail()
 if mails :
     print "Sending mails"
-    slack_notification("Got {} new mails".format(len(mails)))
+    if len(mails) == 1 :
+        slack_notification("Got one new mail")
+    else :
+        slack_notification("Got {} new mails".format(len(mails)))
+    message = ""
     for index, mail in enumerate(mails):
-        message = "{}.\n*Subject* : {}\n*Body* :{}".format(index+1 ,
+        message += " ```{}.\n*Subject* : {}\n*Body* :{}```\n\n".format(index+1 ,
                                                 mail["subject"],
                                                 mail["body"])
         slack_notification(message)
