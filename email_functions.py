@@ -21,7 +21,7 @@ def reading_mail () :  # this function returns a dictionary with email arguments
 	if len(unread_mails) > 0 :
 		for mail in unread_mails :
 			mail.fetch()   # getting all the mail attributes like body,subject etc
-			mail_args = {'subject' : mail.subject , 'body' : mail.body}
+			mail_args = {'subject' : mail.subject , 'body' : mail.body , 'sender' : mail.fr}
 			mail_list.append(mail_args)
 			mail.read()  #marking the mail as read
 		g.logout()  #logging out

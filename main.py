@@ -29,7 +29,8 @@ if mails :
     slack_notification(header_msg)
     message = ""
     for index, mail in enumerate(mails):
-        message = " ```{}.\n*Subject* : {}\n*Body* :{}.```\n\n".format(index+1 ,
+        message = " ```{}. \nFrom : {}\n*Subject* : {}\n*Body* :{}.```\n\n".format(index+1 ,
+                                                mail["sender"],
                                                 mail["subject"],
                                                 mail["body"])
         slack_notification(message)
